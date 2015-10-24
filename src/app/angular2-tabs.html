@@ -1,3 +1,45 @@
-<p>
-  angular2-tabs Works!
-</p>
+<div style="padding: 15px">
+    <h2>Tab header components</h2>
+
+    <!-- TODO: the bootstrap selectors use .nav-tabs > li, and I couldn't find a "replace:true" equivalent to hide the <tab-header> tags -->
+    
+    <div class="tabbable">
+        <tab-headers [(selected-tab-id)]="tabsDemo1.selectedTabId" >
+            <tab-header [tab-id]="'TAB1'">Tab 1</tab-header>
+            <tab-header [tab-id]="tabsDemo1.secondTabId">Tab 2</tab-header>
+            <tab-header [tab-id]="'OTHER_TAB1'">{{tabsDemo1.otherTabName}} 1</tab-header>
+            <tab-header tab-id="OTHER_TAB2"> <!-- this works, surprisingly -->
+                <span style="font-weight: bold">{{tabsDemo1.otherTabName}} 2</span>
+                <span class="glyphicon glyphicon-star"></span>
+            </tab-header>
+        </tab-headers>
+        <div class="tab-content">
+            <div *ng-if="tabsDemo1.selectedTabId === 'TAB1'">Tab Pane content #1</div>
+            <div *ng-if="tabsDemo1.selectedTabId === 'TAB2'">Tab Pane content #2</div>
+            <div *ng-if="tabsDemo1.selectedTabId === 'OTHER_TAB1'">Tab Pane content #3</div>
+            <div *ng-if="tabsDemo1.selectedTabId === 'OTHER_TAB2'">Tab Pane content #4</div>
+        </div>
+    </div>
+
+    <br/>
+    <div>Selected tab ID: {{tabsDemo1.selectedTabId}}</div>
+    <button class="btn btn-default btn-sm" (click)="tabsDemo1.selectedTabId = 'TAB2'">
+      Select the second tab
+    </button>
+
+
+    <h2>Static tab components</h2>
+
+    <tabs>
+        <tab [tab-title]="'Tab 1'">
+            Here is the content of the first tab.
+        </tab>
+        <tab [tab-title]="tabsDemo2.tab2Title" [active]="true">
+            And here is the second one.
+        </tab>
+        <tab [tab-title]="tabsDemo2.tab3TitleHtml">
+            And the <b>third</b>
+        </tab>
+    </tabs>
+
+</div>
